@@ -1,9 +1,6 @@
-def solution(array, commends):
+def solution(array, commands):
     answer=[]
-    for n in range(len(commends)):
-        i=commends[n][0]
-        j=commends[n][1]
-        k=commends[n][2]
+    for i,j,k in commands:
         new_array=array[i-1:j]
         new_array.sort()
         answer.append(new_array[k-1])
