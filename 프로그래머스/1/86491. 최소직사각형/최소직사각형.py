@@ -4,8 +4,6 @@ def solution(sizes):
     for s in sizes:
         if s[0] < s[1]:
             s[0],s[1]=s[1],s[0]
-        
-    for s in sizes:
         if s[0]>maxW:
             maxW=s[0]
         if s[1]>maxH:
