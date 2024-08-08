@@ -11,15 +11,13 @@ def isPrime(n):
 def solution(numbers):
     numberList=list(numbers)
     nums=set()
-    primes=[]
     
     for i in range(1, len(numberList) + 1):
         for perm in itertools.permutations(numberList, i):
-            nums.add(''.join(map(str, perm)))
-    nums = list(map(int, nums))
+            num_str = ''.join(perm).lstrip('0')
+            if num_str:  # 빈 문자열을 방지
+                nums.add(int(num_str))
     
-    for n in nums:
-        if isPrime(n) and n not in primes:
-            primes.append(n)
+    primes = [n for n in nums if isPrime(n)]
             
     return len(primes)
