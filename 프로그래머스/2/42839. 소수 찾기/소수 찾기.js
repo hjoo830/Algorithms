@@ -1,10 +1,10 @@
-function getPermutation(permu, rests, output) {
-    if (permu.length > 0) output.push(Number(permu.join('')));
+function getPermutation(p, rests, output) {
+    if (p.length > 0) output.push(Number(p.join('')));
     if (rests.length === 0) return;
     
-    rests.forEach((v, i) => {
-        const rest = [...rests.slice(0, i), ...rests.slice(i + 1)]
-        getPermutation([...permu, v], rest, output);
+    rests.forEach((v, i) =>{
+        const rest = [...rests.slice(0, i), ...rests.slice(i + 1)];
+        getPermutation([...p, v], rest, output)
     })
 }
 
@@ -20,12 +20,12 @@ function isPrime(n) {
 
 function solution(numbers) {
     let count = 0;
-    let perm = []
-    getPermutation([], numbers.split(''), perm);
-    perm = [...new Set(perm)];
+    let numList = []
+    getPermutation([], numbers.split(''), numList);
+    numList = [...new Set(numList)];
     
-    for (let p of perm) {
-        if (isPrime(p)) count++;
+    for (let n of numList) {
+        if (isPrime(n)) count++;
     }
     return count;
 }
