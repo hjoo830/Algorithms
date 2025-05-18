@@ -1,14 +1,21 @@
-import sys, itertools
+import sys
 
 input = sys.stdin.readline
-n, m = map(int, input().split())
-if m == 1:
-  for i in range(1, n + 1):
-    print(i)
-  exit()
 
-numArr = list(itertools.permutations(range(1, n + 1), m))
-for item in numArr:
-  for i in range(m):
-    print(item[i], end=' ')
-  print()
+n, m = map(int, input().split())
+v = [False] * (n + 1)
+
+def backtrack(path):
+  if len(path) == m:
+    print(*path)
+    return
+  
+  for i in range(1, n + 1):
+    if not v[i]:
+      v[i] = True
+      path.append(i)
+      backtrack(path)
+      path.pop()
+      v[i] = False
+
+backtrack([])
