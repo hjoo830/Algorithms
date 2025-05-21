@@ -1,16 +1,25 @@
-import sys, itertools
+import sys
+
 input = sys.stdin.readline
+
+def backtrack(s, start, path):
+  if len(path) == 6:
+    print(*path)
+    return
+  
+  for i in range(start, k):
+    path.append(s[i])
+    backtrack(s, i + 1, path)
+    path.pop()
 
 while True:
   nums = list(map(int, input().split()))
-  if nums == [0]:
-    break
   k = nums[0]
-  nums = nums[1:]
+  
+  if k == 0:
+    break
 
-  results = list(itertools.combinations(nums, 6))
-  for result in results:
-    for r in result:
-      print(r, end=' ')
-    print()
+  s = nums[1:]
+  s.sort()
+  backtrack(s, 0, [])
   print()
