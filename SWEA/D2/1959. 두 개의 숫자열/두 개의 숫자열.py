@@ -1,33 +1,49 @@
-from collections import deque
+import java.util.*;
 
-t = int(input())
-for tc in range(1, t + 1):
-    n, m = map(int, input().split())
-    a = list(map(int, input().split()))
-    b = list(map(int, input().split()))
-    answer = 0
-    
-    if n == m:
-        for i in range(n):
-            answer += a[i] * b[i]
-         
-    if n > m: # 항상 a가 짧게
-        n, m = m, n
-        a, b = b, a
-        
-    aq = deque(a)
-    diff = m - n
-    for _ in range(diff):
-        aq.append(0)
-        	
-    sums = []
-    for _ in range(diff + 1):
-        aqList = list(aq)
-        s = 0
-        for i in range(m):
-            s += aqList[i] * b[i]
-        sums.append(s)
-        aq.rotate(1)
-        
-    answer = max(sums)    
-    print(f'#{tc} {answer}')
+class Solution
+{
+	public static void main(String args[]) throws Exception
+	{
+		Scanner sc = new Scanner(System.in);
+		int T;
+		T=sc.nextInt();
+
+		for(int test_case = 1; test_case <= T; test_case++)
+		{
+			int n, m;
+            n = sc.nextInt();
+            m = sc.nextInt();
+            ArrayList<Integer> a = new ArrayList<>();
+            ArrayList<Integer> b = new ArrayList<>();
+            
+            for (int i = 0; i < n; i++) {
+                int num = sc.nextInt();
+                a.add(num);
+            }
+            for (int i = 0; i < m; i++) {
+                int num = sc.nextInt();
+                b.add(num);
+            }
+                        
+            int maxSum = 0;
+            if (n < m){
+	            for (int i = 0; i <= m - n; i++) {
+                	int s = 0;
+                    for (int j = 0; j < n; j++) {
+                        s += a.get(j) * b.get(i+j);
+                    }
+                    maxSum = Math.max(maxSum, s);
+                }
+            } else {
+                for (int i = 0; i <= n - m; i++) {
+                	int s = 0;
+                    for (int j = 0; j < m; j++) {
+                        s += a.get(i+j) * b.get(j);
+                    }
+                    maxSum = Math.max(maxSum, s);
+                }
+            }
+            System.out.printf("#%d %d\n", test_case, maxSum);
+		}
+	}
+}
