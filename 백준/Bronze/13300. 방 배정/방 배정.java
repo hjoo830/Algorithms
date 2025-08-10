@@ -7,7 +7,7 @@ public class Main {
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		int n = Integer.parseInt(st.nextToken());
 		int k = Integer.parseInt(st.nextToken());
-		int room = 12;
+		int room = 0;
 
 		int[][] students = new int[7][2];
 		for(int i = 0; i < n; i++) {
@@ -18,14 +18,11 @@ public class Main {
 			students[y][s]++;
 		}
 		
-		for (int i = 1; i < 7; i++) {
+		for (int i = 1; i <= 6; i++) {
 			for (int j = 0; j < 2; j++) {
-				if (students[i][j] == 0) {
-					room--;
-				}
-				if (students[i][j] > k) {
-					room += students[i][j] / k;
-				}
+				if (students[i][j] > 0) {
+					room += (students[i][j] + k - 1) / k;
+				} 
 			}
 		}
 
