@@ -3,8 +3,7 @@ import java.util.*;
 
 public class Solution {
 	static List<Set<Integer>> adj;
-	static boolean[] v;
-	static List<int[]> path;
+	static boolean[] v;	
 	
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -26,23 +25,17 @@ public class Solution {
 			}
 			
 			v = new boolean[101];
-			path = new ArrayList<>();
-			bfs(s);
-			
-			Collections.sort(path, (a, b) -> {
-				if (a[0] != b[0]) return Integer.compare(a[0], b[0]);
-				return Integer.compare(a[1], b[1]);
-			});
-			
-			System.out.printf("#%d %d%n", t, path.get(path.size() - 1)[1]);
+			System.out.printf("#%d %d%n", t, bfs(s));
 		}
-		
 	}
 
-	static void bfs(int s) {
+	static int bfs(int s) {
 		Queue<int[]> q = new ArrayDeque<>();
 		v[s] = true;
 		q.add(new int[] {s, 0});
+		
+		int maxDepth = -1;
+		int maxPerson = -1;
 		
 		while(!q.isEmpty()) {
 			int[] c = q.poll();
@@ -51,9 +44,16 @@ public class Solution {
 				if (!v[n]) {
 					v[n] = true;
 					q.add(new int[] {n, c[1] + 1});
-					path.add(new int[] {c[1] + 1, n});
+					
+					if (c[1] + 1 > maxDepth) {
+						maxDepth = c[1] + 1;
+						maxPerson = n;
+					} else if (c[1] + 1 == maxDepth) {
+						maxPerson = Math.max(n, maxPerson);
+					}
 				}
 			}
 		}
+		return maxPerson;
 	}
 }
