@@ -32,13 +32,12 @@ public class Solution {
 			
 			long sum = 0;
 			for (int i = 0; i < e; i++) {
-				if (find(cost[i][0]) != find(cost[i][1])) {
-					union(cost[i][0], cost[i][1]);
+				if (union(cost[i][0], cost[i][1])) {
 					sum += cost[i][2];
 				}
 			}
-			System.out.printf("#%d %d%n",tc, sum);
-			
+            
+			System.out.printf("#%d %d%n", tc, sum);
 		}
 	}
 	
