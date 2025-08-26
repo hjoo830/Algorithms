@@ -29,8 +29,7 @@ public class Main {
 		
 		int sum = 0;
 		for (int i = 0; i < m; i++) {
-			if (find(cost[i][0]) != find(cost[i][1])) {
-				union(cost[i][0], cost[i][1]);
+			if (union(cost[i][0], cost[i][1])) {
 				sum += cost[i][2];
 			}
 		}
@@ -54,3 +53,4 @@ public class Main {
 		return true;
 	}
 }
+
