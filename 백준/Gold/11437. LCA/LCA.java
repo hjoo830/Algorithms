@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    static Node[] nodes;
+    static int[] parent, depth;
     static boolean[] v;
     static List<Integer>[] adj;
 
@@ -11,13 +11,13 @@ public class Main {
         StringBuilder sb = new StringBuilder();
         int n = Integer.parseInt(br.readLine());
 
-        nodes = new Node[n + 1];
+        parent = new int[n + 1];
+        depth = new int[n + 1];
         v = new boolean[n + 1];
         adj = new ArrayList[n + 1];
 
         for (int i = 1; i <= n; i++) {
             adj[i] = new ArrayList<>();
-            nodes[i] = new Node(0, 0);
         }
 
         for (int i = 0; i < n - 1; i++) {
@@ -46,8 +46,8 @@ public class Main {
         Queue<Integer> q = new ArrayDeque<>();
         q.add(1);
         v[1] = true;
-        nodes[1].parent = 0;
-        nodes[1].depth = 0;
+        parent[1] = 0;
+        depth[1] = 0;
 
         while (!q.isEmpty()) {
             int c = q.poll();
@@ -56,38 +56,29 @@ public class Main {
                 if(!v[nxt]) {
                     q.add(nxt);
                     v[nxt] = true;
-                    nodes[nxt].parent = c;
-                    nodes[nxt].depth = nodes[c].depth + 1;
+                    parent[nxt] = c;
+                    depth[nxt] = depth[c] + 1;
                 }
             }
         }
     }
 
     static int lca(int a, int b) {
-        if (nodes[a].depth > nodes[b].depth) {
+        if (depth[a] > depth[b]) {
             int temp = b;
             b = a;
             a = temp;
         }
 
-        while (nodes[a].depth != nodes[b].depth) {
-            b = nodes[b].parent;
+        while (depth[a] != depth[b]) {
+            b = parent[b];
         }
 
         while (a != b) {
-            a = nodes[a].parent;
-            b = nodes[b].parent;
+            a = parent[a];
+            b = parent[b];
         }
 
         return a;
-    }
-}
-
-class Node {
-    int parent, depth;
-
-    public Node(int parent, int depth) {
-        this.parent = parent;
-        this.depth = depth;
     }
 }
