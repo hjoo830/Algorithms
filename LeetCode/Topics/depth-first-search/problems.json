@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "topic": {
+    "slug": "depth-first-search",
+    "name": "Depth-First Search"
+  },
+  "updatedAt": "2026-07-23T14:58:38.570Z",
+  "problems": [
+    {
+      "frontendId": "207",
+      "title": "Course Schedule",
+      "slug": "course-schedule",
+      "problemName": "0207-course-schedule",
+      "difficulty": "Medium",
+      "leetcodeUrl": "https://leetcode.com/problems/course-schedule/",
+      "folderPath": "LeetCode/0207-course-schedule/",
+      "readmePath": "LeetCode/0207-course-schedule/README.md",
+      "solutions": [
+        {
+          "language": "Java",
+          "extension": ".java",
+          "filename": "0207-course-schedule.java",
+          "path": "LeetCode/0207-course-schedule/0207-course-schedule.java",
+          "sha": "1746a46bd32a700441b82736329cbfe14c4873a0",
+          "lastSyncedAt": "2026-07-23T14:58:38.570Z"
+        }
+      ]
+    }
+  ]
+}
