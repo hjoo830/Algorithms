@@ -6,15 +6,16 @@ class Solution {
         int[] answer = new int[n];
         Arrays.fill(answer, -1);
 
-        for (int i = 0; i < n; i++) {
-            for (int step = 1; step < n; step++) {
-                int j = (i + step) % n;
+        Deque<Integer> stack = new ArrayDeque<>();
 
-                if (nums[i] < nums[j]) {
-                    answer[i] = nums[j];
-                    break;
-                }
+        for (int i = 0; i < 2 * n; i++) {
+            int current = i % n;
+
+            while (!stack.isEmpty() && nums[stack.peek()] < nums[current]) {
+                answer[stack.pop()] = nums[current];
             }
+
+            if (i < n) stack.push(current);
         }
 
         return answer;
